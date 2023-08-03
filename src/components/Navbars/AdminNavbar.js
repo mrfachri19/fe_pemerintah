@@ -52,7 +52,7 @@ export default function Navbar() {
           {/*  */}
           <div className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
             <a
-              className="text-slate-400 hover:text-yellow-500 text-sm uppercase hidden lg:inline-block font-semibold"
+              className="text-slate-400 cursor-pointer hover:text-yellow-500 text-sm uppercase hidden lg:inline-block font-semibold"
               onClick={(e) => e.preventDefault()}
             >
              {localStorage.getItem("nama")}

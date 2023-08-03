@@ -27,18 +27,21 @@ const post = (api) => (data) => {
   });
 };
 
-const patch = (api) => async(param = "", data) => {
-  return axios.patch(`${fullURL(api)}${param}`, data, {
-    method: "PATCH",
-    body: JSON.stringify(data),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-type": "application/json",
-    },
-  });
-};
+const patch =
+  (api) =>
+  async (param = "", data) => {
+    return axios.patch(`${fullURL(api)}${param}`, data, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-type": "application/json",
+      },
+    });
+  };
 
-const get = (api) =>
+const get =
+  (api) =>
   async (param = "") => {
     try {
       return await axios(
@@ -55,6 +58,18 @@ const get = (api) =>
     } catch (err) {
       console.log(err);
     }
+  };
+
+const del =
+  (api) =>
+  async (param = "") => {
+    return axios.delete(`${fullURL(api)}${param}`, {
+      method: "DELETE",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-type": "application/json",
+      },
+    });
   };
 
 const getWithSlug = (api) => (slug, token) => {
@@ -83,6 +98,7 @@ export const majorProject = get("productmp");
 export const rencanaKerja = post("productrk");
 export const listrencanaKerja = get("productrk");
 export const updateRencanaKerja = patch("productrk");
+export const deleteRencanaKerja = del("productrk");
 
 const API = {
   // auth
@@ -96,6 +112,7 @@ const API = {
   majorProject,
   rencanaKerja,
   listrencanaKerja,
+  deleteRencanaKerja,
 };
 
 export default API;

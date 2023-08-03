@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Select, Radio } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   kegiatanPrioritas,
@@ -6,16 +6,20 @@ import {
   prioritasNasional,
   programPrioritas,
   rencanaKerja,
+  updateRencanaKerja,
 } from "../../api";
 import { Messaege } from "../../helper/message";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Dashboard() {
   const history = useHistory();
+  const { id } = useParams();
   const [unitKerja, setUnitKerja] = useState("");
   const [nomenklatur, setNomenKlatur] = useState("");
   const [anggaran, setAnggaran] = useState("");
-  const [prioritas, setPrioritas] = useState(false);
   const [jp, setJp] = useState("");
   const [pn, setPn] = useState("");
   const [listpn, setlistPn] = useState([]);
@@ -25,23 +29,37 @@ export default function Dashboard() {
   const [listkp, setlistKp] = useState([]);
   const [mp, setMp] = useState("");
   const [listmp, setlistMp] = useState([]);
-  const [total, setTotal] = useState("");
-
+  // const [total, setTotal] = useState("");
+  const [value1, setValue1] = useState(1);
+  const [value2, setValue2] = useState(1);
+  const [value3, setValue3] = useState(1);
+  const onChange1 = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue1(e.target.value);
+  };
+  const onChange2 = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue2(e.target.value);
+  };
+  const onChange3 = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue3(e.target.value);
+  };
   const handleChangepn = (value) => {
     console.log(`selected ${value}`);
     setPn(value);
   };
   const handleChangepp = (value) => {
     console.log(`selected ${value}`);
-    setPn(value);
+    setPp(value);
   };
   const handleChangemp = (value) => {
     console.log(`selected ${value}`);
-    setPn(value);
+    setMp(value);
   };
   const handleChangekp = (value) => {
     console.log(`selected ${value}`);
-    setPn(value);
+    setKp(value);
   };
 
   function getprioritasNasional() {
@@ -94,7 +112,42 @@ export default function Dashboard() {
         idSekretariatDeputi: localStorage.getItem("iduser"),
         nomenklatur,
         anggaranAwal: anggaran,
-        prioritas,
+        prioritas: value1,
+        dibawakanRapatkoordinasi: value2,
+        tercantumDalamLaporan: value3,
+        prioritasNasional: pn,
+        prioritasProgram: pp,
+        prioritasKegiatan: kp,
+        janjiPresiden: jp,
+        majorProject: mp,
+        mean: "2",
+        status: "submitted",
+        // totalAnggaranTambahan: "",
+        totalAnggaranKomponen: "Rp. 1.088.088.000",
+      });
+      Messaege("Succes", "Success submitted", "success");
+      setTimeout(() => {
+        history.push("/admin/submitted");
+      }, 2000);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      Messaege("Failed", `failed submiited`, "error");
+    }
+  };
+
+  const EditRencanaKerja = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await updateRencanaKerja(`/${id}`, {
+        nama: localStorage.getItem("nama"),
+        unitKerja,
+        idSekretariatDeputi: localStorage.getItem("iduser"),
+        nomenklatur,
+        anggaranAwal: anggaran,
+        prioritas: value1,
+        dibawakanRapatkoordinasi: value2,
+        tercantumDalamLaporan: value3,
         prioritasNasional: pn,
         prioritasProgram: pp,
         prioritasKegiatan: kp,
@@ -164,15 +217,10 @@ export default function Dashboard() {
                 </label>
                 <div className="">
                   <label className="inline-flex items-center cursor-pointer">
-                    <input
-                      id="customCheckLogin"
-                      type="checkbox"
-                      className="form-checkbox border rounded text-slate-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      onChange={() => setPrioritas(true)}
-                    />
-                    <span className="ml-2 text-sm font-medium text-slate-600">
-                      Prioritas
-                    </span>
+                    <Radio.Group onChange={onChange1} value={value1}>
+                      <Radio value={1}>Ya</Radio>
+                      <Radio value={2}>Tidak</Radio>
+                    </Radio.Group>
                   </label>
                 </div>
               </div>
@@ -192,7 +240,7 @@ export default function Dashboard() {
                   Prioritas Nasional
                 </label>
                 <Select
-                  defaultValue="Meningkatkan Sumber Daya Manusia Berkualitas Dan Berdaya"
+                  defaultValue="Pilih Prioritas"
                   className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   onChange={handleChangepn}
                   options={listpn}
@@ -204,22 +252,48 @@ export default function Dashboard() {
                   Program Prioritas
                 </label>
                 <Select
-                  defaultValue="Pembangunan Wilayah Nusa Tenggara"
+                  defaultValue="Pilih Prioritas"
                   className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   onChange={handleChangepp}
                   options={listpp}
                 />
               </div>
-              <div className="relative w-full">
+              <div className="relative w-full mb-10">
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
                   Kegiatan Prioritas
                 </label>
                 <Select
-                  defaultValue="Pengembangan Daerah Tertinggal, Kawasan Perbatasan, Perdesaan, dan Transmigrasi"
+                  defaultValue="Pilih Prioritas"
                   className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   onChange={handleChangekp}
                   options={listkp}
                 />
+              </div>
+              <div className="flex justify-between mb-10">
+                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                  Dibawakan dalam Rapat Koordinasi
+                </label>
+                <div className="">
+                  <label className="inline-flex items-center cursor-pointer">
+                    <Radio.Group onChange={onChange2} value={value2}>
+                      <Radio value={1}>Ya</Radio>
+                      <Radio value={2}>Tidak</Radio>
+                    </Radio.Group>
+                  </label>
+                </div>
+              </div>
+              <div className="flex justify-between mb-10">
+                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                  Tercantum dalam Laporan
+                </label>
+                <div className="">
+                  <label className="inline-flex items-center cursor-pointer">
+                    <Radio.Group onChange={onChange3} value={value3}>
+                      <Radio value={1}>Ya</Radio>
+                      <Radio value={2}>Tidak</Radio>
+                    </Radio.Group>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -246,7 +320,7 @@ export default function Dashboard() {
                   Major Project
                 </label>
                 <Select
-                  defaultValue="10 Destinasi Pariwisata Prioritas"
+                  defaultValue="Pilih Major Project"
                   className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   onChange={handleChangemp}
                   options={listmp}
@@ -285,10 +359,11 @@ export default function Dashboard() {
       <button
         className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 w-full ease-linear transition-all duration-150"
         type="button"
-        onClick={PostRencanaKerja}
+        onClick={localStorage.getItem('edit') == "true" ? EditRencanaKerja : PostRencanaKerja}
       >
         Submit
       </button>
+      
     </>
   );
 }

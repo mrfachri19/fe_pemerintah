@@ -7,7 +7,7 @@ import {
   CloseCircleOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
-
+import moment from "moment";
 const BiroPerencanaan = () => {
   const history = useHistory();
   const columns = [
@@ -18,7 +18,7 @@ const BiroPerencanaan = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Unit Kerja",
+      title: "Nomenklatur",
       dataIndex: "unit",
       key: "unit",
       render: (text) => <a>{text}</a>,
@@ -27,15 +27,21 @@ const BiroPerencanaan = () => {
       title: "Tanggal",
       dataIndex: "tanggal",
       key: "tanggal",
-      render: (text) => <a>{text}</a>,
+      render: (text) => (
+        <a>{moment(text, "YYYY-MM-DD").format("D MMMM YYYY")}</a>
+      ),
     },
     {
       title: "Prioritas",
       key: "tags",
       dataIndex: "tags",
       render: (text) => (
-        <a>
-          {text == "yes" ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
+        <a className="flex justify-center">
+          {text == 1 ? (
+            <CheckCircleOutlined className="text-green-500" />
+          ) : (
+            <CloseCircleOutlined className="text-gray-500" />
+          )}
         </a>
       ),
     },
@@ -91,10 +97,10 @@ const BiroPerencanaan = () => {
   const items = dataRencanaKerja?.map((item) => {
     const data = {};
     data.name = item.nama;
-    data.unit = item.unitKerja;
+    data.unit = item.nomenklatur;
     data.tanggal = item.createdAt;
     data.tags = item.prioritas;
-    data.address = item.skor ? item.skor : '-';
+    data.address = item.skor ? item.skor : "-";
     data.mean = item.mean;
     data.action = item.id;
 

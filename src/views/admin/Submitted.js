@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Space, Table } from "antd";
 import {
   CheckCircleOutlined,
@@ -6,92 +7,112 @@ import {
   DeleteFilled,
   EditFilled,
 } from "@ant-design/icons";
-import { listrencanaKerja } from "../../api";
-const columns = [
-  {
-    title: "Nama",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Unit Kerja",
-    dataIndex: "unit",
-    key: "unit",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Tanggal",
-    dataIndex: "tanggal",
-    key: "tanggal",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Prioritas",
-    key: "tags",
-    dataIndex: "tags",
-    render: (text) => (
-      <a>{text == "yes" ? <CheckCircleOutlined /> : <CloseCircleOutlined />}</a>
-    ),
-  },
-  {
-    title: "Status",
-    dataIndex: "address",
-    key: "address",
-    render: (text) => <a>{text}</a>,
-  },
+import { deleteRencanaKerja, listrencanaKerja } from "../../api";
+import moment from "moment";
+import { ExclamationCircleFilled } from "@ant-design/icons";
+import { Modal } from "antd";
+import { Messaege } from "../../helper/message";
 
-  {
-    title: "Mean",
-    dataIndex: "mean",
-    key: "mean",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>
-          <EditFilled />
-        </a>
-        <a>
-          <DeleteFilled />
-        </a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    unit: "Asdep Hukum dan Perjanjian Maritim",
-    tanggal: "19/07/2023",
-    address: "Submitted",
-    tags: "no",
-    mean: "2",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    unit: "Asdep Hukum dan Perjanjian Maritim",
-    tanggal: "19/07/2023",
-    address: "Submitted",
-    tags: "yes",
-    mean: "2",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    unit: "Asdep Hukum dan Perjanjian Maritim",
-    tanggal: "19/07/2023",
-    address: "Submitted",
-    tags: "yes",
-    mean: "2",
-  },
-];
 const Submitted = () => {
+  const history = useHistory();
+
+  const { confirm } = Modal;
+
+  const showConfirm = (id) => {
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleFilled />,
+      content: "Some descriptions",
+      onOk() {
+        delrencanaKerja(id);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+  function delrencanaKerja(id) {
+    deleteRencanaKerja(`/${id}`).then((res) => {
+      Messaege("Succes", "Success Delete", "success");
+      setTimeout(() => {
+        getrencanaKerja();
+      }, 2000);
+      console.log(res);
+    });
+  }
+  const columns = [
+    {
+      title: "Nama",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Nomenklatur",
+      dataIndex: "unit",
+      key: "unit",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Tanggal",
+      dataIndex: "tanggal",
+      key: "tanggal",
+      render: (text) => (
+        <a>{moment(text, "YYYY-MM-DD").format("D MMMM YYYY")}</a>
+      ),
+    },
+    {
+      title: "Prioritas",
+      key: "tags",
+      dataIndex: "tags",
+      render: (text) => (
+        <a className="flex justify-center">
+          {text == 1 ? (
+            <CheckCircleOutlined className="text-green-500" />
+          ) : (
+            <CloseCircleOutlined className="text-gray-500" />
+          )}
+        </a>
+      ),
+    },
+    {
+      title: "Status",
+      dataIndex: "address",
+      key: "address",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Mean",
+      dataIndex: "mean",
+      key: "mean",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Jumlah Penilai",
+      dataIndex: "penilai",
+      key: "penilai",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      dataIndex: "action",
+      key: "action",
+      render: (id) => (
+        <Space size="middle" className="flex justify-center">
+          <a>
+            <EditFilled
+              onClick={() => {
+                history.push(`/admin/home/${id}`);
+                localStorage.setItem("edit", "true");
+              }}
+            />
+          </a>
+          <a>
+            <DeleteFilled onClick={() => showConfirm(id)} />
+          </a>
+        </Space>
+      ),
+    },
+  ];
   const [dataRencanaKerja, setdataRencanakerja] = useState([]);
   function getrencanaKerja() {
     listrencanaKerja().then((res) => {
@@ -107,11 +128,12 @@ const Submitted = () => {
   const items = dataRencanaKerja?.map((item) => {
     const data = {};
     data.name = item.nama;
-    data.unit = item.unitKerja;
+    data.unit = item.nomenklatur;
     data.tanggal = item.createdAt;
     data.address = item.status;
     data.tags = item.prioritas;
     data.mean = item.mean;
+    data.action = item.id;
 
     return data;
   });

@@ -22,6 +22,7 @@ export default function Admin() {
         <Suspense fallback={renderLoader()}>
           <Switch>
             <Route path="/admin/home" exact component={Dashboard} />
+            <Route path="/admin/home/:id" exact component={Dashboard} />
             <Route path="/admin/submitted" exact component={Submitted} />
             {/* biro perencanaan */}
             <Route
@@ -30,7 +31,6 @@ export default function Admin() {
               component={BiroPerencanaan}
             />
             <Route path="/admin/penilaian/:id" exact component={Penilaian} />
-
             <Redirect from="/admin" to="/admin/Home" />
           </Switch>
         </Suspense>

@@ -23,9 +23,9 @@ export default function Penilaian() {
   const [nilai5, setnilai5] = useState(0);
   const [nilai6, setnilai6] = useState(0);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  // const handleChange = (value) => {
+  //   console.log(`selected ${value}`);
+  // };
 
   function getIdRencanaKerja() {
     listrencanaKerja(`/${id}`).then((res) => {
