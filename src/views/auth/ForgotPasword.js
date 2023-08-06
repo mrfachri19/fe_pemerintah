@@ -7,9 +7,6 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  function signUp() {
-    history.push("/auth/register");
-  }
   function ResetPaswordUser() {
     let data = {
       email: email,

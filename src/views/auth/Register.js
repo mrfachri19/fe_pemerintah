@@ -82,7 +82,7 @@ export default function Register() {
                   <div className="flex justify-between">
                     <button
                       className={`border px-3 py-3 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring hover:text-slate-600 hover:border-yellow-500 ease-linear transition-all duration-150
-                      ${active == true ? "bg-yellow-500" : ""}
+                      ${active === true ? "bg-yellow-500" : ""}
                     `}
                       onClick={(e) => {
                         e.preventDefault();
@@ -95,7 +95,7 @@ export default function Register() {
                     </button>
                     <button
                       className={`border px-3 py-3 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring hover:text-slate-600 hover:border-yellow-500 ease-linear transition-all duration-150
-                      ${active1 == true ? "bg-yellow-500" : ""}`}
+                      ${active1 === true ? "bg-yellow-500" : ""}`}
                       onClick={(e) => {
                         e.preventDefault();
                         setActive1(!active1);

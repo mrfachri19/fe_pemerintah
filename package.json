@@ -1,7 +1,6 @@
 {
   "name": "react-base-v3",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "@fortawesome/fontawesome-free": "5.15.3",
@@ -11,8 +10,6 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.7.2",
     "axios": "^0.26.0",
-    "chart.js": "2.9.4",
-    "firebase": "^9.6.8",
     "moment": "^2.29.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

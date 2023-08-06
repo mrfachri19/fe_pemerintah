@@ -359,7 +359,7 @@ export default function Dashboard() {
       <button
         className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 w-full ease-linear transition-all duration-150"
         type="button"
-        onClick={localStorage.getItem('edit') == "true" ? EditRencanaKerja : PostRencanaKerja}
+        onClick={localStorage.getItem('edit') === "true" ? EditRencanaKerja : PostRencanaKerja}
       >
         Submit
       </button>

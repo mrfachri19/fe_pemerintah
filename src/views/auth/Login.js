@@ -28,7 +28,7 @@ export default function Login() {
 
       Messaege("Succes", "Success Login", "success");
       setTimeout(() => {
-        if (response.data.data.role == "biroPerencanaan") {
+        if (response.data.data.role === "biroPerencanaan") {
           history.push("/admin/biroPerencanaan");
         } else {
           history.push("/admin/home");
