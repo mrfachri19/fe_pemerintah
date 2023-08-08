@@ -40,8 +40,8 @@ export default function Register() {
               <img className="" src={logo} alt="img"></img>
             </div>
             <div className="text-black text-center mb-5 text-sm font-bold">
-              Kementrian Koordinator Kemaritiman{" "}
-              <span className="block">dan Investas</span>
+              Kementrian Koordinator Bidang Kemaritiman
+              <span className="block">dan Investasi</span>
             </div>
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border">
               <div className="rounded-t mb-0 px-6 py-6">

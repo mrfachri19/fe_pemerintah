@@ -47,6 +47,7 @@ export default function Penilaian() {
       e.preventDefault();
       const response = await updateRencanaKerja(`/${id}`, {
         skor: nilai,
+        totalAnggaranKomponen: nilai * 5438638057
       });
       Messaege("Succes", "Success submitted", "success");
       setTimeout(() => {
@@ -58,7 +59,9 @@ export default function Penilaian() {
       Messaege("Failed", `failed submiited`, "error");
     }
   };
-
+  const sparator = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   return (
     <>
       {/* section 1 */}
@@ -138,6 +141,8 @@ export default function Penilaian() {
                   <div className="block">
                     <span className="text-xs block text-slate-600">Skor</span>
                     <input
+                      max={5}
+                      min={0}
                       type="number"
                       className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                       placeholder=""
@@ -158,6 +163,8 @@ export default function Penilaian() {
                 <div className="block">
                   <span className="text-xs block text-slate-600">Skor</span>
                   <input
+                    max={5}
+                    min={0}
                     type="number"
                     className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                     placeholder=""
@@ -177,6 +184,8 @@ export default function Penilaian() {
                 <div className="block">
                   <span className="text-xs block text-slate-600">Skor</span>
                   <input
+                    max={5}
+                    min={0}
                     type="number"
                     className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                     placeholder=""
@@ -205,6 +214,8 @@ export default function Penilaian() {
                 <div className="block">
                   <span className="text-xs block text-slate-600">Skor</span>
                   <input
+                    max={5}
+                    min={0}
                     type="number"
                     className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                     placeholder=""
@@ -224,6 +235,8 @@ export default function Penilaian() {
                 <div className="block">
                   <span className="text-xs block text-slate-600">Skor</span>
                   <input
+                    max={5}
+                    min={0}
                     type="number"
                     className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                     placeholder=""
@@ -244,6 +257,8 @@ export default function Penilaian() {
                 <div className="block">
                   <span className="text-xs block text-slate-600">Skor</span>
                   <input
+                    max={5}
+                    min={0}
                     type="number"
                     className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                     placeholder=""
@@ -278,7 +293,7 @@ export default function Penilaian() {
                 Total Anggaran Komponen
               </label>
               <span className="ml-2 text-sm font-medium text-slate-600">
-                {data.totalAnggaranKomponen}
+               Rp {sparator(nilai * 5438638057)}
               </span>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../../assets/img/Logo Kemenko Bidang Kemaritiman Dan Investasi 1.png";
 import { Signin } from "../../api";
 import { Messaege } from "../../helper/message";
+import { setToken } from "../../helper/storage";
 export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ export default function Login() {
         email: email,
         password: password,
       });
+      setToken(response.data.data.token);
       localStorage.setItem("token", response.data.data.token);
       localStorage.setItem("iduser", response.data.data.id);
       localStorage.setItem("role", response.data.data.role);
@@ -49,8 +51,8 @@ export default function Login() {
               <img className="" src={logo} alt="img"></img>
             </div>
             <div className="text-black text-center mb-5 text-sm font-bold">
-              Kementrian Koordinator Kemaritiman{" "}
-              <span className="block">dan Investas</span>
+              Kementrian Koordinator Bidang Kemaritiman
+              <span className="block">dan Investasi</span>
             </div>
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border">
               <div className="rounded-t mb-0 px-6 py-6">

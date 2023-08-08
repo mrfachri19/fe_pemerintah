@@ -123,7 +123,7 @@ export default function Dashboard() {
         mean: "2",
         status: "submitted",
         // totalAnggaranTambahan: "",
-        totalAnggaranKomponen: "Rp. 1.088.088.000",
+        totalAnggaranKomponen: "54.386.380,57",
       });
       Messaege("Succes", "Success submitted", "success");
       setTimeout(() => {
@@ -350,7 +350,7 @@ export default function Dashboard() {
                 Total Anggaran Komponen
               </label>
               <span className="ml-2 text-sm font-medium text-slate-600">
-                Rp. 1.043.864.806
+                Rp. 54.386.380,57
               </span>
             </div>
           </div>
