@@ -94,6 +94,7 @@ const Submitted = () => {
       render: (text) => <a>{text}</a>,
     },
     {
+      title: "Action",
       dataIndex: "action",
       key: "action",
       render: (id) => (
@@ -133,6 +134,7 @@ const Submitted = () => {
     data.address = item.status;
     data.tags = item.prioritas;
     data.mean = item.mean;
+    data.penilai = item.penilai;
     data.action = item.id;
 
     return data;

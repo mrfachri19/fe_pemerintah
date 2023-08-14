@@ -95,10 +95,15 @@ export const prioritasNasional = get("productpn");
 export const kegiatanPrioritas = get("productkp");
 export const programPrioritas = get("productpp");
 export const majorProject = get("productmp");
+export const janjiPresiden = get("productjp");
 export const rencanaKerja = post("productrk");
 export const listrencanaKerja = get("productrk");
 export const updateRencanaKerja = patch("productrk");
 export const deleteRencanaKerja = del("productrk");
+// user
+export const updateProfile = patch("user");
+export const getuserDetail = get("user");
+export const getAllUsersPenilai = get("user/?search=true");
 
 const API = {
   // auth
@@ -109,10 +114,15 @@ const API = {
   prioritasNasional,
   kegiatanPrioritas,
   programPrioritas,
+  janjiPresiden,
   majorProject,
   rencanaKerja,
   listrencanaKerja,
   deleteRencanaKerja,
+  // user
+  updateProfile,
+  getuserDetail,
+  getAllUsersPenilai,
 };
 
 export default API;

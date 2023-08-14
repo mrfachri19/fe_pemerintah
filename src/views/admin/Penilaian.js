@@ -7,7 +7,13 @@ import {
 } from "@ant-design/icons";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { listrencanaKerja, updateRencanaKerja } from "../../api";
+import {
+  getAllUsersPenilai,
+  getuserDetail,
+  listrencanaKerja,
+  updateProfile,
+  updateRencanaKerja,
+} from "../../api";
 import { useState } from "react";
 import { Messaege } from "../../helper/message";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -16,6 +22,8 @@ export default function Penilaian() {
   const { id } = useParams();
   const history = useHistory();
   const [data, setData] = useState({});
+  const [dataPenilai, setDataPenilai] = useState({});
+  const [jlhPenilai, setJlhPenilai] = useState([]);
   const [nilai1, setnilai1] = useState(0);
   const [nilai2, setnilai2] = useState(0);
   const [nilai3, setnilai3] = useState(0);
@@ -31,24 +39,69 @@ export default function Penilaian() {
     listrencanaKerja(`/${id}`).then((res) => {
       var tempList;
       tempList = res.data.data[0];
-      console.log("List Data => ", tempList);
+      console.log("data rencana kerja => ", tempList);
       setData(tempList);
+    });
+  }
+
+  function getUsers() {
+    getAllUsersPenilai().then((res) => {
+      var tempList;
+      tempList = res.data.pagination.totalData;
+      console.log("penilai => ", tempList);
+      setJlhPenilai(tempList);
+    });
+  }
+
+  function getIdUser() {
+    getuserDetail(`/${localStorage.getItem("iduser")}`).then((res) => {
+      var tempList;
+      tempList = res.data.data[0].nilai;
+      console.log("detail user => ", tempList);
+      setDataPenilai(tempList);
     });
   }
 
   useEffect(() => {
     getIdRencanaKerja();
+    getUsers();
+    getIdUser();
   }, []);
 
-  let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6;
+  const updateNilaiUser = async () => {
+    try {
+      const response = await updateProfile(
+        `/${localStorage.getItem("iduser")}`,
+        {
+          skor: nilai,
+          totalAnggaranKomponen: total,
+          nilai: dataPenilai !== "true" ? "true" : "false",
+        }
+      );
+      Messaege("Succes", "Success submitted", "success");
+      setTimeout(() => {
+        history.push("/admin/biroPerencanaan");
+      }, 2000);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      Messaege("Failed", `failed submiited`, "error");
+    }
+  };
 
+  let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6;
+  let total = (54386380, 57 + nilai * 30000000);
+  let totalPenilai = dataPenilai !== "true" ? jlhPenilai + 1 : jlhPenilai;
   const PostPenilaian = async (e) => {
     try {
       e.preventDefault();
       const response = await updateRencanaKerja(`/${id}`, {
         skor: nilai,
-        totalAnggaranKomponen: nilai * 5438638057
+        totalAnggaranKomponen: total,
+        penilai: totalPenilai,
+        mean: nilai / totalPenilai
       });
+      updateNilaiUser();
       Messaege("Succes", "Success submitted", "success");
       setTimeout(() => {
         history.push("/admin/biroPerencanaan");
@@ -99,7 +152,7 @@ export default function Penilaian() {
                   Anggaran Awal
                 </label>
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-slate-600  ">
-                  {data.anggaranAwal}
+                  {"Rp.54.386.380,57"}
                 </label>
               </div>
               <div className="relative w-full mb-10">
@@ -293,7 +346,7 @@ export default function Penilaian() {
                 Total Anggaran Komponen
               </label>
               <span className="ml-2 text-sm font-medium text-slate-600">
-               Rp {sparator(nilai * 5438638057)}
+                Rp {sparator(54386380, 57 + nilai * 30000000)}
               </span>
             </div>
           </div>

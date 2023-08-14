@@ -59,7 +59,13 @@ const BiroPerencanaan = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "",
+      title: "Jumlah Penilai",
+      dataIndex: "penilai",
+      key: "penilai",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Action",
       dataIndex: "action",
       key: "action",
       render: (id) => (
@@ -100,8 +106,9 @@ const BiroPerencanaan = () => {
     data.unit = item.nomenklatur;
     data.tanggal = item.createdAt;
     data.tags = item.prioritas;
-    data.address = item.skor ? item.skor : "-";
+    data.address = item.skor ? item.skor : "0";
     data.mean = item.mean;
+    data.penilai = item.penilai;
     data.action = item.id;
 
     return data;

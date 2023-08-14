@@ -1,6 +1,7 @@
 import { Select, Radio } from "antd";
 import React, { useEffect, useState } from "react";
 import {
+  janjiPresiden,
   kegiatanPrioritas,
   majorProject,
   prioritasNasional,
@@ -19,8 +20,6 @@ export default function Dashboard() {
   const { id } = useParams();
   const [unitKerja, setUnitKerja] = useState("");
   const [nomenklatur, setNomenKlatur] = useState("");
-  const [anggaran, setAnggaran] = useState("");
-  const [jp, setJp] = useState("");
   const [pn, setPn] = useState("");
   const [listpn, setlistPn] = useState([]);
   const [pp, setPp] = useState("");
@@ -29,6 +28,8 @@ export default function Dashboard() {
   const [listkp, setlistKp] = useState([]);
   const [mp, setMp] = useState("");
   const [listmp, setlistMp] = useState([]);
+  const [jp, setJp] = useState("");
+  const [listJp, setlistJp] = useState([]);
   // const [total, setTotal] = useState("");
   const [value1, setValue1] = useState(1);
   const [value2, setValue2] = useState(1);
@@ -56,6 +57,10 @@ export default function Dashboard() {
   const handleChangemp = (value) => {
     console.log(`selected ${value}`);
     setMp(value);
+  };
+  const handleChangejp = (value) => {
+    console.log(`selected ${value}`);
+    setJp(value);
   };
   const handleChangekp = (value) => {
     console.log(`selected ${value}`);
@@ -86,6 +91,14 @@ export default function Dashboard() {
       setlistMp(tempList);
     });
   }
+  function getJanjiPresiden() {
+    janjiPresiden().then((res) => {
+      var tempList = [];
+      tempList = res.data.data;
+      console.log("List Data => ", tempList);
+      setlistJp(tempList);
+    });
+  }
   function getprogramPrioritas() {
     programPrioritas().then((res) => {
       var tempList = [];
@@ -100,7 +113,8 @@ export default function Dashboard() {
     getMajorProject();
     getkegiatanPrioritas();
     getprogramPrioritas();
-    console.log(pn);
+    getJanjiPresiden();
+    // console.log(pn);
   }, []);
 
   const PostRencanaKerja = async (e) => {
@@ -111,7 +125,6 @@ export default function Dashboard() {
         unitKerja,
         idSekretariatDeputi: localStorage.getItem("iduser"),
         nomenklatur,
-        anggaranAwal: anggaran,
         prioritas: value1,
         dibawakanRapatkoordinasi: value2,
         tercantumDalamLaporan: value3,
@@ -120,10 +133,11 @@ export default function Dashboard() {
         prioritasKegiatan: kp,
         janjiPresiden: jp,
         majorProject: mp,
-        mean: "2",
+        mean: "0",
         status: "submitted",
+        penilai: 0,
         // totalAnggaranTambahan: "",
-        totalAnggaranKomponen: "54.386.380,57",
+        totalAnggaranKomponen: "Rp.54.386.380,57",
       });
       Messaege("Succes", "Success submitted", "success");
       setTimeout(() => {
@@ -144,7 +158,6 @@ export default function Dashboard() {
         unitKerja,
         idSekretariatDeputi: localStorage.getItem("iduser"),
         nomenklatur,
-        anggaranAwal: anggaran,
         prioritas: value1,
         dibawakanRapatkoordinasi: value2,
         tercantumDalamLaporan: value3,
@@ -155,8 +168,9 @@ export default function Dashboard() {
         majorProject: mp,
         mean: "2",
         status: "submitted",
+        penilai: 0,
         // totalAnggaranTambahan: "",
-        totalAnggaranKomponen: "Rp. 1.088.088.000",
+        totalAnggaranKomponen: "Rp.54.386.380,57",
       });
       Messaege("Succes", "Success submitted", "success");
       setTimeout(() => {
@@ -200,17 +214,7 @@ export default function Dashboard() {
                   onChange={(e) => setNomenKlatur(e.target.value)}
                 />
               </div>
-              <div className="relative w-full mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Anggaran Awal
-                </label>
-                <input
-                  type="text"
-                  className="border px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder=""
-                  onChange={(e) => setAnggaran(e.target.value)}
-                />
-              </div>
+
               <div className="flex justify-between">
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
                   Kegiatan Prioritas
@@ -229,118 +233,110 @@ export default function Dashboard() {
         </div>
       </div>
       {/* section  */}
-      <div>
-        <div className="relative flex flex-col break-words mb-6 shadow-lg rounded-lg border bg-white  mt-10">
-          <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <div className="py-10">
-              <div className="relative w-full mb-10">
-                <h2 className="font-bold text-xl mb-10">RPJMN 2020-2024</h2>
+      {value1 === 1 ? (
+        <div>
+          <div className="relative flex flex-col break-words mb-6 shadow-lg rounded-lg border bg-white  mt-10">
+            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <div className="py-10">
+                <div className="relative w-full mb-10">
+                  <h2 className="font-bold text-xl mb-10">RPJMN 2020-2024</h2>
 
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Prioritas Nasional
-                </label>
-                <Select
-                  defaultValue="Pilih Prioritas"
-                  className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  onChange={handleChangepn}
-                  options={listpn}
-                />
-              </div>
-
-              <div className="relative w-full mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Program Prioritas
-                </label>
-                <Select
-                  defaultValue="Pilih Prioritas"
-                  className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  onChange={handleChangepp}
-                  options={listpp}
-                />
-              </div>
-              <div className="relative w-full mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Kegiatan Prioritas
-                </label>
-                <Select
-                  defaultValue="Pilih Prioritas"
-                  className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  onChange={handleChangekp}
-                  options={listkp}
-                />
-              </div>
-              <div className="flex justify-between mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Dibawakan dalam Rapat Koordinasi
-                </label>
-                <div className="">
-                  <label className="inline-flex items-center cursor-pointer">
-                    <Radio.Group onChange={onChange2} value={value2}>
-                      <Radio value={1}>Ya</Radio>
-                      <Radio value={2}>Tidak</Radio>
-                    </Radio.Group>
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Prioritas Nasional
                   </label>
+                  <Select
+                    defaultValue="Pilih Prioritas"
+                    className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChangepn}
+                    options={listpn}
+                  />
+                </div>
+
+                <div className="relative w-full mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Program Prioritas
+                  </label>
+                  <Select
+                    defaultValue="Pilih Prioritas"
+                    className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChangepp}
+                    options={listpp}
+                  />
+                </div>
+                <div className="relative w-full mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Kegiatan Prioritas
+                  </label>
+                  <Select
+                    defaultValue="Pilih Prioritas"
+                    className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChangekp}
+                    options={listkp}
+                  />
+                </div>
+                <div className="flex justify-between mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Dibawakan dalam Rapat Koordinasi
+                  </label>
+                  <div className="">
+                    <label className="inline-flex items-center cursor-pointer">
+                      <Radio.Group onChange={onChange2} value={value2}>
+                        <Radio value={1}>Ya</Radio>
+                        <Radio value={2}>Tidak</Radio>
+                      </Radio.Group>
+                    </label>
+                  </div>
+                </div>
+                <div className="flex justify-between mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Tercantum dalam Laporan
+                  </label>
+                  <div className="">
+                    <label className="inline-flex items-center cursor-pointer">
+                      <Radio.Group onChange={onChange3} value={value3}>
+                        <Radio value={1}>Ya</Radio>
+                        <Radio value={2}>Tidak</Radio>
+                      </Radio.Group>
+                    </label>
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-between mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Tercantum dalam Laporan
-                </label>
-                <div className="">
-                  <label className="inline-flex items-center cursor-pointer">
-                    <Radio.Group onChange={onChange3} value={value3}>
-                      <Radio value={1}>Ya</Radio>
-                      <Radio value={2}>Tidak</Radio>
-                    </Radio.Group>
+            </div>
+          </div>
+          {/* section 3 */}
+          <div className="relative flex flex-col break-words mb-6 shadow-lg rounded-lg border bg-white  mt-10">
+            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <div className="py-10">
+                <div className="relative w-full mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Janji Presiden
                   </label>
+                  <Select
+                    defaultValue="Pilih Janji Presiden"
+                    className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChangejp}
+                    options={listJp}
+                  />
+                </div>
+                <div className="relative w-full mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Major Project
+                  </label>
+                  <Select
+                    defaultValue="Pilih Major Project"
+                    className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={handleChangemp}
+                    options={listmp}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* section 3 */}
-      <div>
-        <div className="relative flex flex-col break-words mb-6 shadow-lg rounded-lg border bg-white  mt-10">
-          <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <div className="py-10">
-              <div className="relative w-full mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Janji Presiden
-                </label>
-                <input
-                  type="text"
-                  className="border px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder=""
-                  onChange={(e) => setJp(e.target.value)}
-                />
-              </div>
-              <div className="relative w-full mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Major Project
-                </label>
-                <Select
-                  defaultValue="Pilih Major Project"
-                  className="text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  onChange={handleChangemp}
-                  options={listmp}
-                />
-              </div>
-              {/* <div className="relative w-full">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Total Anggaran Tambahan
-                </label>
-                <input
-                  type="text"
-                  className="border px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder=""
-                  onChange={(e) => setTotal(e.target.value)}
-                />
-              </div> */}
-            </div>
-          </div>
-        </div>
-      </div>
+      ) : (
+        <></>
+      )}
+
       {/* section 4 */}
       <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
         <div className="flex-auto px-4 lg:px-10 pt-2">
@@ -359,11 +355,14 @@ export default function Dashboard() {
       <button
         className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 w-full ease-linear transition-all duration-150"
         type="button"
-        onClick={localStorage.getItem('edit') === "true" ? EditRencanaKerja : PostRencanaKerja}
+        onClick={
+          localStorage.getItem("edit") === "true"
+            ? EditRencanaKerja
+            : PostRencanaKerja
+        }
       >
         Submit
       </button>
-      
     </>
   );
 }
