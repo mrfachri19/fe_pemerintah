@@ -30,7 +30,7 @@ export default function Penilaian() {
   const [nilai4, setnilai4] = useState(0);
   const [nilai5, setnilai5] = useState(0);
   const [nilai6, setnilai6] = useState(0);
-
+  const [totalAnggaranTambahan, setTotalAnggarantambahan] = useState(0);
   // const handleChange = (value) => {
   //   console.log(`selected ${value}`);
   // };
@@ -66,7 +66,7 @@ export default function Penilaian() {
     getIdRencanaKerja();
     getUsers();
     getIdUser();
-  }, []);
+  }, [nilai1, nilai2]);
 
   const updateNilaiUser = async () => {
     try {
@@ -90,7 +90,7 @@ export default function Penilaian() {
   };
 
   let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6;
-  let total = (54386380, 57 + nilai * 30000000);
+  let total = (54386380,57 + totalAnggaranTambahan + (nilai * 30000000));
   let totalPenilai = dataPenilai !== "true" ? jlhPenilai + 1 : jlhPenilai;
   const PostPenilaian = async (e) => {
     try {
@@ -98,8 +98,9 @@ export default function Penilaian() {
       const response = await updateRencanaKerja(`/${id}`, {
         skor: nilai,
         totalAnggaranKomponen: total,
+        totalAnggaranTambahan: totalAnggaranTambahan,
         penilai: totalPenilai,
-        mean: nilai / totalPenilai
+        mean: nilai / totalPenilai,
       });
       updateNilaiUser();
       Messaege("Succes", "Success submitted", "success");
@@ -113,7 +114,7 @@ export default function Penilaian() {
     }
   };
   const sparator = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
   return (
     <>
@@ -301,22 +302,13 @@ export default function Penilaian() {
               <div className="flex justify-between mb-10">
                 <div>
                   <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                    Total Anggaran Tambahan
-                  </label>
-                  <label className="block text-grey-60 text-xs font-semibold text-slate-600  ">
-                    {data.totalAnggaranTambahan}
+                    Total Skor
                   </label>
                 </div>
                 <div className="block">
-                  <span className="text-xs block text-slate-600">Skor</span>
-                  <input
-                    max={5}
-                    min={0}
-                    type="number"
-                    className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
-                    placeholder=""
-                    onChange={(e) => setnilai6(parseInt(e.target.value))}
-                  />
+                  <span className="ml-2 text-sm font-medium text-slate-600">
+                    {nilai}
+                  </span>
                 </div>
               </div>
             </div>
@@ -327,13 +319,21 @@ export default function Penilaian() {
       <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
         <div className="flex-auto px-4 lg:px-10 pt-2">
           <div className="py-10">
-            <div className="flex justify-between">
-              <label className="block text-grey-60 text-xs font-semibold text-grey-20  ">
-                Total Skor
-              </label>
-              <span className="ml-2 text-sm font-medium text-slate-600">
-                {nilai}
-              </span>
+            <div className=" mb-10">
+              <div>
+                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                  Total Anggaran Tambahan
+                </label>
+              </div>
+              <div className="block">
+                <input
+                  min={0}
+                  type="number"
+                  className="border px-3 py-2 w-full placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                  placeholder=""
+                  onChange={(e) => setTotalAnggarantambahan(parseInt(e.target.value))}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -346,7 +346,7 @@ export default function Penilaian() {
                 Total Anggaran Komponen
               </label>
               <span className="ml-2 text-sm font-medium text-slate-600">
-                Rp {sparator(54386380, 57 + nilai * 30000000)}
+                Rp { total == (54386380,57) ? "54.386.380,57" : sparator(total)}
               </span>
             </div>
           </div>

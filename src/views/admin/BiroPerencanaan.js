@@ -71,7 +71,11 @@ const BiroPerencanaan = () => {
       render: (id) => (
         <Space size="middle">
           <a>
-            <DownloadOutlined />
+            <DownloadOutlined
+              onClick={() => {
+                history.push(`/admin/table/${id}`);
+              }}
+            />
           </a>
           <a>
             <button

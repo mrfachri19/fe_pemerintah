@@ -7,6 +7,7 @@ import AdminNavbar from "../components/Navbars/AdminNavbar.js";
 import Submitted from "../views/admin/Submitted.js";
 import BiroPerencanaan from "../views/admin/BiroPerencanaan.js";
 import Penilaian from "../views/admin/Penilaian.js";
+import TableExport from "../views/admin/tableExport.js";
 
 export default function Admin() {
   // views
@@ -31,6 +32,7 @@ export default function Admin() {
               component={BiroPerencanaan}
             />
             <Route path="/admin/penilaian/:id" exact component={Penilaian} />
+            <Route path="/admin/table/:id" exact component={TableExport} />
             <Redirect from="/admin" to="/admin/Home" />
           </Switch>
         </Suspense>
