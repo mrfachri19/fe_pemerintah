@@ -90,27 +90,41 @@ export default function Penilaian() {
   };
 
   let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6;
-  let total = (54386380,57 + totalAnggaranTambahan + (nilai * 30000000));
+  let total = (54386380, 57 + totalAnggaranTambahan + nilai * 30000000);
   let totalPenilai = dataPenilai !== "true" ? jlhPenilai + 1 : jlhPenilai;
-  const PostPenilaian = async (e) => {
-    try {
-      e.preventDefault();
-      const response = await updateRencanaKerja(`/${id}`, {
-        skor: nilai,
-        totalAnggaranKomponen: total,
-        totalAnggaranTambahan: totalAnggaranTambahan,
-        penilai: totalPenilai,
-        mean: nilai / totalPenilai,
-      });
-      updateNilaiUser();
-      Messaege("Succes", "Success submitted", "success");
-      setTimeout(() => {
-        history.push("/admin/biroPerencanaan");
-      }, 2000);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      Messaege("Failed", `failed submiited`, "error");
+  const PostPenilaian = async () => {
+    if (
+      // nilai1 < 0 ||
+      nilai1 > 5 ||
+      // nilai2 < 0 ||
+      nilai2 > 5 ||
+      // nilai3 < 0 ||
+      nilai3 > 5 ||
+      // nilai4 < 0 ||
+      nilai4 > 5 ||
+      // nilai5 < 0 ||
+      nilai5 > 5
+    ) {
+      Messaege("Failed", `Skor harus diatas 5`, "error");
+    } else {
+      try {
+        const response = await updateRencanaKerja(`/${id}`, {
+          skor: nilai,
+          totalAnggaranKomponen: total,
+          totalAnggaranTambahan: totalAnggaranTambahan,
+          penilai: totalPenilai,
+          mean: nilai / totalPenilai,
+        });
+        updateNilaiUser();
+        Messaege("Succes", "Success submitted", "success");
+        setTimeout(() => {
+          history.push("/admin/biroPerencanaan");
+        }, 2000);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+        Messaege("Failed", `failed submiited`, "error");
+      }
     }
   };
   const sparator = (x) => {
@@ -164,7 +178,7 @@ export default function Penilaian() {
                   <label className="text-grey-60 text-xs font-semibold text-slate-600  ">
                     Kegiatan Prioritas
                   </label>
-                  {data.prioritas == "true" ? (
+                  {data.prioritas == 1 ? (
                     <CheckCircleOutlined className="text-yellow-500 ml-3" />
                   ) : (
                     <CloseCircleOutlined className="text-yellow-500 ml-3" />
@@ -331,7 +345,9 @@ export default function Penilaian() {
                   type="number"
                   className="border px-3 py-2 w-full placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                   placeholder=""
-                  onChange={(e) => setTotalAnggarantambahan(parseInt(e.target.value))}
+                  onChange={(e) =>
+                    setTotalAnggarantambahan(parseInt(e.target.value))
+                  }
                 />
               </div>
             </div>
@@ -346,7 +362,7 @@ export default function Penilaian() {
                 Total Anggaran Komponen
               </label>
               <span className="ml-2 text-sm font-medium text-slate-600">
-                Rp { total == (54386380,57) ? "54.386.380,57" : sparator(total)}
+                Rp {total == (54386380, 57) ? "54.386.380,57" : sparator(total)}
               </span>
             </div>
           </div>
@@ -354,7 +370,6 @@ export default function Penilaian() {
       </div>
       <button
         className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 w-full ease-linear transition-all duration-150"
-        type="button"
         onClick={PostPenilaian}
       >
         Submit

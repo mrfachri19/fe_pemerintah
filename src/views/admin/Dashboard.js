@@ -48,7 +48,7 @@ export default function Dashboard() {
   };
   const handleChangepn = (value, data) => {
     console.log(`selected ${value}`);
-    console.log(data);
+    // console.log(data);
     setPn(data);
   };
   const handleChangepp = (value, data) => {
@@ -72,7 +72,7 @@ export default function Dashboard() {
     prioritasNasional().then((res) => {
       var tempList = [];
       tempList = res.data.data;
-      console.log("List Data => ", tempList);
+      // console.log("List Data => ", tempList);
       setlistPn(tempList);
     });
   }
@@ -80,7 +80,7 @@ export default function Dashboard() {
     kegiatanPrioritas().then((res) => {
       var tempList = [];
       tempList = res.data.data;
-      console.log("List Data => ", tempList);
+      // console.log("List Data => ", tempList);
       if (pn.id === 1) {
         let temps = tempList.filter((item) => {
           return item.id < 46;
@@ -336,7 +336,7 @@ export default function Dashboard() {
     majorProject().then((res) => {
       var tempList = [];
       tempList = res.data.data;
-      console.log("List Data => ", tempList);
+      // console.log("List Data => ", tempList);
       setlistMp(tempList);
     });
   }
@@ -344,7 +344,7 @@ export default function Dashboard() {
     janjiPresiden().then((res) => {
       var tempList = [];
       tempList = res.data.data;
-      console.log("List Data => ", tempList);
+      // console.log("List Data => ", tempList);
       setlistJp(tempList);
     });
   }
@@ -352,18 +352,18 @@ export default function Dashboard() {
     programPrioritas().then((res) => {
       var tempList = [];
       tempList = res.data.data;
-      console.log("List Data => ", tempList);
+      // console.log("List Data => ", tempList);
       if (pn.id === 1) {
         let temps = tempList.filter((item) => {
           return item.id <= 8;
         });
-        console.log(temps);
+        // console.log(temps);
         setlistPp(temps);
       } else if (pn.id === 2) {
         let temps = tempList.filter((item) => {
           return item.id > 8 && item.id < 16;
         });
-        console.log(temps);
+        // console.log(temps);
         setlistPp(temps);
       } else if (pn.id === 3) {
         let temps = tempList.filter((item) => {
@@ -374,7 +374,7 @@ export default function Dashboard() {
         let temps = tempList.filter((item) => {
           return item.id > 22 && item.id < 27;
         });
-        console.log(temps);
+        // console.log(temps);
         setlistPp(temps);
       } else if (pn.id === 5) {
         let temps = tempList.filter((item) => {
@@ -385,13 +385,13 @@ export default function Dashboard() {
         let temps = tempList.filter((item) => {
           return item.id > 31 && item.id < 35;
         });
-        console.log(temps);
+        // console.log(temps);
         setlistPp(temps);
       } else if (pn.id === 7) {
         let temps = tempList.filter((item) => {
           return item.id > 34 && item.id < 40;
         });
-        console.log(temps);
+        // console.log(temps);
         setlistPp(temps);
       } else {
         setlistPp(tempList);
@@ -419,22 +419,22 @@ export default function Dashboard() {
         prioritas: value1,
         dibawakanRapatkoordinasi: value2,
         tercantumDalamLaporan: value3,
-        prioritasNasional: pn,
-        prioritasProgram: pp,
-        prioritasKegiatan: kp,
-        janjiPresiden: jp,
-        majorProject: mp,
+        prioritasNasional: pn.value,
+        prioritasProgram: pp.value,
+        prioritasKegiatan: kp.value,
+        janjiPresiden: jp.value,
+        majorProject: mp.value,
         mean: "0",
         status: "submitted",
         penilai: 0,
         // totalAnggaranTambahan: "",
         // totalAnggaranKomponen: "Rp.54.386.380,57",
       });
+      console.log(response);
       Messaege("Succes", "Success submitted", "success");
       setTimeout(() => {
         history.push("/admin/submitted");
       }, 2000);
-      console.log(response);
     } catch (error) {
       console.log(error);
       Messaege("Failed", `failed submiited`, "error");
@@ -467,7 +467,7 @@ export default function Dashboard() {
       setTimeout(() => {
         history.push("/admin/submitted");
       }, 2000);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
       Messaege("Failed", `failed submiited`, "error");

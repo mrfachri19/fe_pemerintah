@@ -38,77 +38,204 @@ const TableExport = () => {
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden">
               <table class="min-w-full" id="table-to-xls">
-                <thead class="bg-gray-200 border-b">
-                  <tr>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Nama
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Nomenklatur
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Tanggal
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Prioritas
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Skor
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Mean
-                    </th>{" "}
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Jumlah Penilai
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {data.nama}
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {data.nomenklatur}
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {moment(data.updatedAt, "YYYY-MM-DD").format("D MMMM YYYY")}
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {data.prioritas == 1 ? "Iya" : "Tidak"}{" "}
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {data.skor}
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {data.mean}
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {data.penilai}
-                    </td>
-                  </tr>
-                </tbody>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Nama
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.nama}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Unit Kerja
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.unitKerja}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Nomenklatur
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.nomenklatur}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Anggaran Awal
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.anggaranAwal ? data.anggaranAwal : "-"}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Dibawakan Rapat Koordinasi
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.dibawakanRapatkoordinasi === 1 ? "iya" : "tidak"}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Tercantum Dalam laporan
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.tercantumDalamLaporan === 1 ? "iya" : "tidak"}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Prioritas nasional
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.prioritasNasional}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Prioritas Program
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.prioritasProgram}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Prioritas Kegiatan
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.prioritasKegiatan}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Janji Presiden
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.janjiPresiden}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Major Project
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.majorProject}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Mean
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.mean}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Status
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.status}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Skor
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.skor}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Penilai
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.penilai}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Total Anggaran Tambahan
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    {data.totalAnggaranTambahan ? data.totalAnggaranTambahan : "-"}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Total Anggaran Komponen
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                    Rp. {data.totalAnggaranKomponen}
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="col"
+                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                  >
+                    Updated at
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
+                     {data.updatedAt}
+                  </td>
+                </tr>
               </table>
             </div>
           </div>
