@@ -8,6 +8,7 @@ import Submitted from "../views/admin/Submitted.js";
 import BiroPerencanaan from "../views/admin/BiroPerencanaan.js";
 import Penilaian from "../views/admin/Penilaian.js";
 import TableExport from "../views/admin/tableExport.js";
+import PrivateRoute from "../helper/PrivateRoute.js";
 
 export default function Admin() {
   // views
@@ -22,17 +23,17 @@ export default function Admin() {
       <div className="px-4 md:mx-36 mx-auto h-full mt-10">
         <Suspense fallback={renderLoader()}>
           <Switch>
-            <Route path="/admin/home" exact component={Dashboard} />
-            <Route path="/admin/home/:id" exact component={Dashboard} />
-            <Route path="/admin/submitted" exact component={Submitted} />
+            <PrivateRoute path="/admin/home" exact component={Dashboard} />
+            <PrivateRoute path="/admin/home/:id" exact component={Dashboard} />
+            <PrivateRoute path="/admin/submitted" exact component={Submitted} />
             {/* biro perencanaan */}
-            <Route
+            <PrivateRoute
               path="/admin/biroPerencanaan"
               exact
               component={BiroPerencanaan}
             />
-            <Route path="/admin/penilaian/:id" exact component={Penilaian} />
-            <Route path="/admin/table/:id" exact component={TableExport} />
+            <PrivateRoute path="/admin/penilaian/:id" exact component={Penilaian} />
+            <PrivateRoute path="/admin/table/:id" exact component={TableExport} />
             <Redirect from="/admin" to="/admin/Home" />
           </Switch>
         </Suspense>

@@ -41,7 +41,7 @@ const TableExport = () => {
                 <tr>
                   <th
                     scope="col"
-                    class="text-sm  font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left bg-gray-100 border-b"
                   >
                     Nama
                   </th>
@@ -211,7 +211,9 @@ const TableExport = () => {
                     Total Anggaran Tambahan
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
-                    {data.totalAnggaranTambahan ? data.totalAnggaranTambahan : "-"}
+                    {data.totalAnggaranTambahan
+                      ? data.totalAnggaranTambahan
+                      : "-"}
                   </td>
                 </tr>
                 <tr>
@@ -233,7 +235,7 @@ const TableExport = () => {
                     Updated at
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 text-sm font-medium text-gray-900">
-                     {data.updatedAt}
+                    {moment(data.updatedAt, "YYYY-MM-DD").format("D MMMM YYYY")}
                   </td>
                 </tr>
               </table>
