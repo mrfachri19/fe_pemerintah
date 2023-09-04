@@ -30,6 +30,7 @@ export default function Dashboard() {
   const [listmp, setlistMp] = useState([]);
   const [jp, setJp] = useState("");
   const [listJp, setlistJp] = useState([]);
+  const [anggaranAwal, setAnggaranAwal] = useState(0);
   // const [total, setTotal] = useState("");
   const [value1, setValue1] = useState(1);
   const [value2, setValue2] = useState(1);
@@ -427,6 +428,7 @@ export default function Dashboard() {
         mean: "0",
         status: "submitted",
         penilai: 0,
+        anggaranAwal: anggaranAwal,
         // totalAnggaranTambahan: "",
         // totalAnggaranKomponen: "Rp.54.386.380,57",
       });
@@ -503,6 +505,19 @@ export default function Dashboard() {
                   className="border px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder=""
                   onChange={(e) => setNomenKlatur(e.target.value)}
+                />
+              </div>
+
+              <div className="relative w-full mb-10">
+                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                  Anggaran Awal
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  className="border px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder=""
+                  onChange={(e) => setAnggaranAwal(e.target.value)}
                 />
               </div>
 

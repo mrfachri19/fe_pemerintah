@@ -90,7 +90,8 @@ export default function Penilaian() {
   };
 
   let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6;
-  let total = (54386380, 57 + totalAnggaranTambahan + nilai * 30000000);
+  let anggaran = data.anggaranAwal
+  let total = (anggaran + totalAnggaranTambahan + nilai * 30000000);
   let totalPenilai = dataPenilai !== "true" ? jlhPenilai + 1 : jlhPenilai;
   const PostPenilaian = async () => {
     if (
@@ -167,7 +168,7 @@ export default function Penilaian() {
                   Anggaran Awal
                 </label>
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-slate-600  ">
-                  {"Rp.54.386.380,57"}
+                 Rp {data.anggaranAwal}
                 </label>
               </div>
               <div className="relative w-full mb-10">
