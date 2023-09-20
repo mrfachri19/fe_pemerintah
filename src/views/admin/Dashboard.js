@@ -428,7 +428,7 @@ export default function Dashboard() {
         mean: "0",
         status: "submitted",
         penilai: 0,
-        anggaranAwal: anggaranAwal,
+        // anggaranAwal: anggaranAwal,
         // totalAnggaranTambahan: "",
         // totalAnggaranKomponen: "Rp.54.386.380,57",
       });
@@ -508,7 +508,7 @@ export default function Dashboard() {
                 />
               </div>
 
-              <div className="relative w-full mb-10">
+              {/* <div className="relative w-full mb-10">
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
                   Anggaran Awal
                 </label>
@@ -519,7 +519,7 @@ export default function Dashboard() {
                   placeholder=""
                   onChange={(e) => setAnggaranAwal(e.target.value)}
                 />
-              </div>
+              </div> */}
 
               <div className="flex justify-between">
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">

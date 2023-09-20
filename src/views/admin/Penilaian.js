@@ -30,7 +30,11 @@ export default function Penilaian() {
   const [nilai4, setnilai4] = useState(0);
   const [nilai5, setnilai5] = useState(0);
   const [nilai6, setnilai6] = useState(0);
+  const [nilai7, setnilai7] = useState(0);
+  const [nilai8, setnilai8] = useState(0);
+
   const [totalAnggaranTambahan, setTotalAnggarantambahan] = useState(0);
+  const [anggaranAwal, setAnggaranAwal] = useState(0);
   // const handleChange = (value) => {
   //   console.log(`selected ${value}`);
   // };
@@ -89,9 +93,9 @@ export default function Penilaian() {
     }
   };
 
-  let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6;
-  let anggaran = data.anggaranAwal
-  let total = (anggaran + totalAnggaranTambahan + nilai * 30000000);
+  let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6 + nilai7 + nilai8;
+  // let anggaran = data.anggaranAwal;
+  let total = anggaranAwal + totalAnggaranTambahan + nilai * 30000000;
   let totalPenilai = dataPenilai !== "true" ? jlhPenilai + 1 : jlhPenilai;
   const PostPenilaian = async () => {
     if (
@@ -104,9 +108,11 @@ export default function Penilaian() {
       // nilai4 < 0 ||
       nilai4 > 5 ||
       // nilai5 < 0 ||
-      nilai5 > 5
+      nilai5 > 5 ||
+      nilai5 > 7 ||
+      nilai5 > 8
     ) {
-      Messaege("Failed", `Skor harus diatas 5`, "error");
+      Messaege("Failed", `Skor tidak boleh diatas 5`, "error");
     } else {
       try {
         const response = await updateRencanaKerja(`/${id}`, {
@@ -115,6 +121,7 @@ export default function Penilaian() {
           totalAnggaranTambahan: totalAnggaranTambahan,
           penilai: totalPenilai,
           mean: nilai / totalPenilai,
+          anggaranAwal: anggaranAwal,
         });
         updateNilaiUser();
         Messaege("Succes", "Success submitted", "success");
@@ -164,12 +171,18 @@ export default function Penilaian() {
                 </label>
               </div>
               <div className="relative w-full mb-10">
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
-                  Anggaran Awal
-                </label>
-                <label className="block text-grey-60 text-xs font-semibold mb-2 text-slate-600  ">
-                 Rp {data.anggaranAwal}
-                </label>
+                <div className="relative w-full mb-10">
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Anggaran Awal
+                  </label>
+                  <input
+                    type="number"
+                    min={0}
+                    className="border px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder=""
+                    onChange={(e) => setAnggaranAwal(e.target.value)}
+                  />
+                </div>
               </div>
               <div className="relative w-full mb-10">
                 <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
@@ -310,6 +323,50 @@ export default function Penilaian() {
                     className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                     placeholder=""
                     onChange={(e) => setnilai5(parseInt(e.target.value))}
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-10">
+                <div>
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Dibawakan dalam Rapat Koordinasi
+                  </label>
+                  <label className="block text-grey-60 text-xs font-semibold text-slate-600  ">
+                    {data.dibawakanRapatkoordinasi === 1 ? "iya" : "tidak"}
+                  </label>
+                </div>
+                <div className="block">
+                  <span className="text-xs block text-slate-600">Skor</span>
+                  <input
+                    max={5}
+                    min={0}
+                    type="number"
+                    className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                    placeholder=""
+                    onChange={(e) => setnilai7(parseInt(e.target.value))}
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between mb-10">
+                <div>
+                  <label className="block text-grey-60 text-xs font-semibold mb-2 text-grey-20  ">
+                    Tercantum Dalam Laporan
+                  </label>
+                  <label className="block text-grey-60 text-xs font-semibold text-slate-600  ">
+                    {data.tercantumDalamLaporan === 1 ? "iya" : "tidak"}
+                  </label>
+                </div>
+                <div className="block">
+                  <span className="text-xs block text-slate-600">Skor</span>
+                  <input
+                    max={5}
+                    min={0}
+                    type="number"
+                    className="border px-3 py-1 w-20 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                    placeholder=""
+                    onChange={(e) => setnilai8(parseInt(e.target.value))}
                   />
                 </div>
               </div>
