@@ -91,11 +91,11 @@ export const RegisterUser = post("auth/register");
 export const Signin = post("auth/login");
 export const ResetPassword = patch("auth/reset-password");
 // home
-export const prioritasNasional = get("productpn");
-export const kegiatanPrioritas = get("productkp");
-export const programPrioritas = get("productpp");
-export const majorProject = get("productmp");
-export const janjiPresiden = get("productjp");
+export const prioritasNasional = get("productpn?order=asc&sort=id");
+export const kegiatanPrioritas = get("productkp?order=asc&sort=id");
+export const programPrioritas = get("productpp?order=asc&sort=id");
+export const majorProject = get("productmp?order=asc&sort=id");
+export const janjiPresiden = get("productjp?order=asc&sort=id");
 export const rencanaKerja = post("productrk");
 export const listrencanaKerja = get("productrk");
 export const updateRencanaKerja = patch("productrk");

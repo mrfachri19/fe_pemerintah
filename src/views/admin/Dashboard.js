@@ -77,278 +77,6 @@ export default function Dashboard() {
       setlistPn(tempList);
     });
   }
-  function getkegiatanPrioritas() {
-    kegiatanPrioritas().then((res) => {
-      var tempList = [];
-      tempList = res.data.data;
-      // console.log("List Data => ", tempList);
-      if (pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 46;
-        });
-        setlistKp(temps);
-      }
-      // pn 1 ============================
-      else if (pp.id === 1 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 6;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 12 && item.id > 5;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 17 && item.id > 11;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 4 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 22 && item.id > 16;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 5 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 27 && item.id > 21;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 6 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 33 && item.id > 26;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 7 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 40 && item.id > 32;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 8 && pn.id === 1) {
-        let temps = tempList.filter((item) => {
-          return item.id < 46 && item.id > 39;
-        });
-        setlistKp(temps);
-      }
-      // pn 2 ==============================================
-      else if (pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 81 && item.id >= 46;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 1 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 51 && item.id >= 46;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 56 && item.id >= 51;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 61 && item.id >= 56;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 4 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 66 && item.id >= 61;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 5 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 71 && item.id >= 66;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 6 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 76 && item.id >= 71;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 7 && pn.id === 2) {
-        let temps = tempList.filter((item) => {
-          return item.id < 81 && item.id >= 76;
-        });
-        setlistKp(temps);
-      }
-      // pn 3 ===========================
-      else if (pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 110 && item.id >= 81;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 1 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 85 && item.id >= 81;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 89 && item.id >= 85;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 94 && item.id >= 89;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 4 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 99 && item.id >= 94;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 5 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 102 && item.id >= 99;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 6 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 106 && item.id >= 102;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 7 && pn.id === 3) {
-        let temps = tempList.filter((item) => {
-          return item.id < 110 && item.id >= 106;
-        });
-        setlistKp(temps);
-      }
-      // pn 4 ===========================
-      else if (pn.id === 4) {
-        let temps = tempList.filter((item) => {
-          return item.id < 130 && item.id >= 110;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 1 && pn.id === 4) {
-        let temps = tempList.filter((item) => {
-          return item.id < 116 && item.id >= 110;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 4) {
-        let temps = tempList.filter((item) => {
-          return item.id < 121 && item.id >= 116;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 4) {
-        let temps = tempList.filter((item) => {
-          return item.id < 126 && item.id >= 121;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 4 && pn.id === 4) {
-        let temps = tempList.filter((item) => {
-          return item.id < 130 && item.id >= 126;
-        });
-        setlistKp(temps);
-      }
-      // pn 5 ===========================
-      else if (pn.id === 5) {
-        let temps = tempList.filter((item) => {
-          return item.id < 151 && item.id >= 130;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 1 && pn.id === 5) {
-        let temps = tempList.filter((item) => {
-          return item.id < 130 && item.id >= 126;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 5) {
-        let temps = tempList.filter((item) => {
-          return item.id < 141 && item.id >= 130;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 5) {
-        let temps = tempList.filter((item) => {
-          return item.id < 145 && item.id >= 141;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 4 && pn.id === 5) {
-        let temps = tempList.filter((item) => {
-          return item.id < 148 && item.id >= 145;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 5 && pn.id === 5) {
-        let temps = tempList.filter((item) => {
-          return item.id < 151 && item.id >= 148;
-        });
-        setlistKp(temps);
-      }
-      // pn 6 ===========================
-      else if (pn.id === 6) {
-        let temps = tempList.filter((item) => {
-          return item.id < 162 && item.id >= 151;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 1 && pn.id === 6) {
-        let temps = tempList.filter((item) => {
-          return item.id < 155 && item.id >= 151;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 6) {
-        let temps = tempList.filter((item) => {
-          return item.id < 157 && item.id >= 155;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 6) {
-        let temps = tempList.filter((item) => {
-          return item.id < 162 && item.id >= 157;
-        });
-        setlistKp(temps);
-      }
-      // pn 6 ===========================
-      else if (pn.id === 7) {
-        let temps = tempList.filter((item) => {
-          return item.id < 182 && item.id > 163;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 1 && pn.id === 7) {
-        let temps = tempList.filter((item) => {
-          return item.id < 165 && item.id >= 162;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 2 && pn.id === 7) {
-        let temps = tempList.filter((item) => {
-          return item.id < 169 && item.id >= 165;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 3 && pn.id === 7) {
-        let temps = tempList.filter((item) => {
-          return item.id < 173 && item.id >= 169;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 4 && pn.id === 7) {
-        let temps = tempList.filter((item) => {
-          return item.id < 177 && item.id >= 173;
-        });
-        setlistKp(temps);
-      } else if (pp.id === 5 && pn.id === 7) {
-        let temps = tempList.filter((item) => {
-          return item.id < 182 && item.id >= 177;
-        });
-        setlistKp(temps);
-      }
-      // all =========================
-      else {
-        setlistKp(tempList);
-      }
-    });
-  }
-  function getMajorProject() {
-    majorProject().then((res) => {
-      var tempList = [];
-      tempList = res.data.data;
-      // console.log("List Data => ", tempList);
-      setlistMp(tempList);
-    });
-  }
-  function getJanjiPresiden() {
-    janjiPresiden().then((res) => {
-      var tempList = [];
-      tempList = res.data.data;
-      // console.log("List Data => ", tempList);
-      setlistJp(tempList);
-    });
-  }
   function getprogramPrioritas() {
     programPrioritas().then((res) => {
       var tempList = [];
@@ -394,12 +122,287 @@ export default function Dashboard() {
         });
         // console.log(temps);
         setlistPp(temps);
-      } else {
-        setlistPp(tempList);
-      }
+      } 
+      // else {
+      //   setlistPp(tempList);
+      // }
       // setlistPp(tempList);
     });
   }
+  function getkegiatanPrioritas() {
+    kegiatanPrioritas().then((res) => {
+      var tempList = [];
+      tempList = res.data.data;
+      // console.log("List Data => ", tempList);
+      // if (pn.id === 1) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 46;
+      //   });
+      //   setlistKp(temps);
+      // } else if (pn.id === 2) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 81 && item.id >= 46;
+      //   });
+      //   setlistKp(temps);
+      // } else if (pn.id === 3) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 110 && item.id >= 81;
+      //   });
+      //   setlistKp(temps);
+      // } else if (pn.id === 7) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 182 && item.id > 163;
+      //   });
+      //   setlistKp(temps);
+      // } else if (pn.id === 4) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 130 && item.id >= 110;
+      //   });
+      //   setlistKp(temps);
+      // } else if (pn.id === 5) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 151 && item.id >= 130;
+      //   });
+      //   setlistKp(temps);
+      // } else if (pn.id === 6) {
+      //   let temps = tempList.filter((item) => {
+      //     return item.id < 162 && item.id >= 151;
+      //   });
+      //   setlistKp(temps);
+      // }
+      // pn 1 ==============================================
+      if (pn.id === 1 && pp.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id <= 5;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 2 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 12 && item.id > 5;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 3 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 17 && item.id > 11;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 4 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 22 && item.id > 16;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 5 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 27 && item.id > 21;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 6 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 33 && item.id > 26;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 7 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 40 && item.id > 32;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 8 && pn.id === 1) {
+        let temps = tempList.filter((item) => {
+          return item.id < 46 && item.id > 39;
+        });
+        setlistKp(temps);
+      }
+      // pn 2 ==============================================
+      if (pp.id === 9 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 51 && item.id >= 46;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 10 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 56 && item.id >= 51;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 11 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 61 && item.id >= 56;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 12 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 66 && item.id >= 61;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 13 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 71 && item.id >= 66;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 14 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 76 && item.id >= 71;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 15 && pn.id === 2) {
+        let temps = tempList.filter((item) => {
+          return item.id < 81 && item.id >= 76;
+        });
+        setlistKp(temps);
+      }
+      // // pn 3 ===============================================
+      if (pp.id === 16 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 85 && item.id >= 81;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 17 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 89 && item.id >= 85;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 18 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 94 && item.id >= 89;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 19 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 99 && item.id >= 94;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 20 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 102 && item.id >= 99;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 21 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 106 && item.id >= 102;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 22 && pn.id === 3) {
+        let temps = tempList.filter((item) => {
+          return item.id < 110 && item.id >= 106;
+        });
+        setlistKp(temps);
+      }
+      // // pn 4 ==============================================
+      if (pp.id === 23 && pn.id === 4) {
+        let temps = tempList.filter((item) => {
+          return item.id < 116 && item.id >= 110;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 24 && pn.id === 4) {
+        let temps = tempList.filter((item) => {
+          return item.id < 121 && item.id >= 116;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 25 && pn.id === 4) {
+        let temps = tempList.filter((item) => {
+          return item.id < 126 && item.id >= 121;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 26 && pn.id === 4) {
+        let temps = tempList.filter((item) => {
+          return item.id < 130 && item.id >= 126;
+        });
+        setlistKp(temps);
+      }
+      // // pn 5 ===========================
+      if (pp.id === 27 && pn.id === 5) {
+        let temps = tempList.filter((item) => {
+          return item.id < 130 && item.id >= 126;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 28 && pn.id === 5) {
+        let temps = tempList.filter((item) => {
+          return item.id < 141 && item.id >= 130;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 29 && pn.id === 5) {
+        let temps = tempList.filter((item) => {
+          return item.id < 145 && item.id >= 141;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 30 && pn.id === 5) {
+        let temps = tempList.filter((item) => {
+          return item.id < 148 && item.id >= 145;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 31 && pn.id === 5) {
+        let temps = tempList.filter((item) => {
+          return item.id < 151 && item.id >= 148;
+        });
+        setlistKp(temps);
+      }
+      // // pn 6 ===========================
+       if (pp.id === 32 && pn.id === 6) {
+        let temps = tempList.filter((item) => {
+          return item.id < 155 && item.id >= 151;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 33 && pn.id === 6) {
+        let temps = tempList.filter((item) => {
+          return item.id < 157 && item.id >= 155;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 34 && pn.id === 6) {
+        let temps = tempList.filter((item) => {
+          return item.id < 162 && item.id >= 157;
+        });
+        setlistKp(temps);
+      }
+      // // pn 6 ===========================
+       if (pp.id === 35 && pn.id === 7) {
+        let temps = tempList.filter((item) => {
+          return item.id < 165 && item.id >= 162;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 36 && pn.id === 7) {
+        let temps = tempList.filter((item) => {
+          return item.id < 169 && item.id >= 165;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 37 && pn.id === 7) {
+        let temps = tempList.filter((item) => {
+          return item.id < 173 && item.id >= 169;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 38 && pn.id === 7) {
+        let temps = tempList.filter((item) => {
+          return item.id < 177 && item.id >= 173;
+        });
+        setlistKp(temps);
+      } else if (pp.id === 39 && pn.id === 7) {
+        let temps = tempList.filter((item) => {
+          return item.id < 182 && item.id >= 177;
+        });
+        setlistKp(temps);
+      }
+
+      // all =========================================
+      // else {
+      //   setlistKp(tempList);
+      // }
+    });
+  }
+  function getMajorProject() {
+    majorProject().then((res) => {
+      var tempList = [];
+      tempList = res.data.data;
+      // console.log("List Data => ", tempList);
+      setlistMp(tempList);
+    });
+  }
+  function getJanjiPresiden() {
+    janjiPresiden().then((res) => {
+      var tempList = [];
+      tempList = res.data.data;
+      // console.log("List Data => ", tempList);
+      setlistJp(tempList);
+    });
+  }
+
 
   useEffect(() => {
     getprioritasNasional();
