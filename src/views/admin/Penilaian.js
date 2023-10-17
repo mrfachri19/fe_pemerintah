@@ -136,7 +136,7 @@ export default function Penilaian() {
     }
   };
   const sparator = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   return (
     <>
@@ -420,7 +420,7 @@ export default function Penilaian() {
                 Total Anggaran Komponen
               </label>
               <span className="ml-2 text-sm font-medium text-slate-600">
-                Rp {total == (54386380, 57) ? "54.386.380,57" : sparator(total)}
+                {total == (54386380, 57) ? "Rp. 54.386.380,57" : "Rp." +sparator(total)}
               </span>
             </div>
           </div>
