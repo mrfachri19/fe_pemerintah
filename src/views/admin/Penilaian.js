@@ -95,7 +95,7 @@ export default function Penilaian() {
 
   let nilai = nilai1 + nilai2 + nilai3 + nilai4 + nilai5 + nilai6 + nilai7 + nilai8;
   // let anggaran = data.anggaranAwal;
-  let total = anggaranAwal + totalAnggaranTambahan + nilai * 30000000;
+  let total = anggaranAwal + (nilai * 30000000);
   let totalPenilai = dataPenilai !== "true" ? jlhPenilai + 1 : jlhPenilai;
   const PostPenilaian = async () => {
     if (
@@ -388,7 +388,7 @@ export default function Penilaian() {
         </div>
       </div>
       {/* section 4 */}
-      <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
+      {/* <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
         <div className="flex-auto px-4 lg:px-10 pt-2">
           <div className="py-10">
             <div className=" mb-10">
@@ -411,8 +411,8 @@ export default function Penilaian() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
+      </div> */}
+      {/* <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
         <div className="flex-auto px-4 lg:px-10 pt-2">
           <div className="py-10">
             <div className="flex justify-between">
@@ -425,7 +425,7 @@ export default function Penilaian() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <button
         className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 w-full ease-linear transition-all duration-150"
         onClick={PostPenilaian}
