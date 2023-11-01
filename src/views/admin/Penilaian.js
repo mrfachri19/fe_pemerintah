@@ -412,7 +412,7 @@ export default function Penilaian() {
           </div>
         </div>
       </div> */}
-      {/* <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
+      <div className="relative flex flex-col mb-6 shadow-lg rounded-lg border bg-white  mt-10">
         <div className="flex-auto px-4 lg:px-10 pt-2">
           <div className="py-10">
             <div className="flex justify-between">
@@ -425,7 +425,7 @@ export default function Penilaian() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
       <button
         className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-10 w-full ease-linear transition-all duration-150"
         onClick={PostPenilaian}
